@@ -1,0 +1,57 @@
+#!/bin/bash
+
+# DISCOVERING PROGRAMS IN PATH
+
+# This initial script is designed to assess the capability of locating a specified program within the user's PATH.
+# PATH is an environment variable that instructs a Linux system in which directories to search for executables
+
+in_path()  {                                      # Define `in_path` function.      
+     cmd=$1                                       # Assigns the first argument passed to the function to the variable `cmd`.
+     ourpath=$2                                   # Assigns the second argument passed to the function to the variable `ourpath`.
+     result=1                                     # Initializes the variable `result` to 1.
+     oldIFS=$IFS                                  # Saves the current value of the Internal Field Separator (IFS) to the variable oldIFS
+     IFS=":"                                      # Changes the Internal Field Separator to a colon (:). This is used to split the `ourpath` into directories.
+
+     for directory in $ourpath                    # Loop through each directory in `ourpath`.
+     do 
+         if [ -x $directory/$cmd ]; then          # Checks if the command ($cmd) is executable (-x) in the current directory ($directory). if yes, then the condition becomes true.
+             echo "This command is executable"
+             result=0                             # If we're here, we found $cmd in $directory. If true, sets result to 0.
+         fi                                       # End of if loop.
+
+     done                                         # End of for loop.
+
+     IFS=$oldIFS                                  # Restores the original value of IFS.
+     return $result                               # Returns the value of result (0 if the command is found and executable, 1 otherwise).
+}
+
+
+
+checkForCmdInPath() {                             # Define `checkForCmdInPath` function.
+    var=$1                                        # Assigns the first argument passed to the function to the variable `var`.
+
+    if [ "$var" != "" ]; then                     # Checks if `var` is not empty
+        if [ "${var:0:1}" = "/" ]; then           # If var starts with a /, it checks if it's found (-e). If not, returns 1.
+            if [ ! -x $var ]; then
+                return 1
+            fi
+        elif ! in_path "$var" "$PATH" ; then      # If not starting with /, it checks if var is not found in the $PATH using the in_path function. If not found, returns 2
+            return 2                              
+       fi
+    fi
+}
+
+
+if [ $# -ne 1 ]; then                             # Checks if number of command-line arguments is not equal to 1. 
+    echo "Usage: $0 <command>" >&2 ; exit 1       # Prints message to stderr stream and exuts with a status code of 1.
+fi
+
+checkForCmdInPath "$1"                            # Calls `checkForCmdInPath` with the provided command.
+case $? in                                        # Using a `case statement to check return value of `checkForCmdInPath`. $? shows exit status in calling function.
+  0 ) echo "$1 found in PATH"  ;;                 # If 0, prints the command found in the PATH.
+  1 ) echo "$1 not found or not executable"  ;;   # If 1, prints the command not found or not executable.
+  2 ) echo "$1 not executable"  ;;                # If 2, prints the command not executable.
+esac
+
+
+

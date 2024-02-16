@@ -1,0 +1,33 @@
+#!/bin/bash
+
+# This shell script defines a function validAlphaNum to check if a given input string contains only alphanumeric characters (letters and numbers). 
+# The script then prompts the user for input, validates it using the validAlphaNum function, and prints whether the input is valid or not.
+# Here's a breakdown of each line:
+
+validAlphaNum()                                          
+{                                                         
+
+  validchars="$(echo $1 | sed -e 's/[^[:alnum:]]//g')" # The ` sed -e 's/[^[:alnum:]]//g' ` command matches any character not in alphanumeric set and replaces them with nothing. 
+  if [ "$validchars" = "$1" ]; then                    # Checks if the modified validchars is equal to the original input string.
+    return 0                                           # The function returns 0 (success)  if the modified 'validchars' is equal to the original input string.
+  else
+    return 1                                           # Otherwise, it returns 1 (failure).
+  fi  
+}
+
+# MAIN SCRIPT
+
+/bin/echo -n "Enter input: "                           # Prints the prompt without a newline, so the user's input will appear on the same line.
+read input                                             # Reads user input and assigns it to the variable input
+
+# Input validation
+
+if ! validAlphaNum "$input" ; then                     # Checks if the input is not valid by calling the validAlphaNum function.
+  echo "Please enter only letters and numbers." >&2    # Prints an error message to standard error (file descriptor 2) indicating that the input should only contain letters and numbers.
+    exit 1                                             # Exits the script with a non-zero status code, indicating an error.
+else                                                   
+  echo "Input is valid"                                # If the input is valid, it prints a success message
+fi
+
+exit 0                                                 # Exits the script with a status code of 0, indicating success.
+

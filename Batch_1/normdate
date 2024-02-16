@@ -1,0 +1,46 @@
+#!/bin/bash
+
+# Sript should be executed using the Bash shell.
+# normdate--Standardizes the month field in the date specification to three letters, with the first letter capitalized.
+# The program exits with 0 in the absence of errors.
+
+monthNumToName()
+{
+   # Set the 'month' variable to the appropriate value.
+   case $1 in                                          # Takes a month number as an argument and sets the `month` variable to the corresponding three-letter month abbreviation.                                     
+     1 ) month="Jan"    ;;  2 ) month="Feb"    ;;      # Match value of 1 to Jan, value of 2 to Feb
+     3 ) month="Mar"    ;;  4 ) month="Apr"    ;;      # Match value of 3 to Mar, value of 4 to Apr
+     5 ) month="May"    ;;  6 ) month="Jun"    ;;      # Match value of 5 to May, value of 6 to Jun
+     7 ) month="Jul"    ;;  8 ) month="Aug"    ;;      # Match value of 7 to Jul, value of 8 to Aug
+     9 ) month="Sep"    ;;  10 ) month="Oct"   ;;      # Match value of 9 to Sep, value of 10 to Oct
+     11 ) month="Nov"   ;;  12 ) month="Dec"   ;;      # Match value of 11 to Nov, value of 12 to Dec
+     * ) echo "$0: Unknown month value $1" >&2         # Prints an error message to standard error (>&2) when input isn't a valid month number(not in range 1 - 12).
+         exit 1                                        # Exits with non-zero status if error message is printed. non-zero values are used to signal different types of errors.
+   esac                                                # Marks the end of the case block.
+   return 0                                            # Specifies the exit status of a function. return value of 0 typically indicates success.
+}
+    
+# MAIN SCRIPT
+
+if [$# -ne 3]; then                                    # Checks how many command-line arguments are called with script.  $# variable represents number of command-line arguments.
+  echo "Usage: $0 month day year" >&2                  # If the number of arguments is not 3, it prints a usage message to standard error.
+  echo "Formats are August 5 1962  OR  8 3 1962" >&2   # Indicating the expected format.
+  exit 1                                               # Exits with a non-zero status.
+fi                                                     # Marks end of if statement.
+
+if [ $3 -le 99 ] ; then                                # Checks if year (placed as 3rd argument) is less than or equal to 99.                           
+  echo "$0: expected 4-digit year value." >&2          # Prints an error message to standard error.
+  exit 1                                               # Exits with non-zero status.
+fi
+
+# This checks if input for month is numeric or not
+if [ -z $(echo $1|sed 's/[[:digit:]]//g') ]; then      # The ` sed 's/[[:digit:]]//g' ` command removes any digits from input. if true, then input is numeric.
+  monthNumToName $1                                    # Calls function with month number.
+else                                                   # Beginning of else block when input is not numeric
+  month="$(echo $1|cut -c1|tr '[:lower:]' '[:upper:]')"          # Assuming input is in correct foramt, converts 1st letter to uppercase.
+  month="$(echo $1|cut -c2-3 | tr '[:upper:]' '[:lower:]')"      # Converts the 2nd and 3rd letter to lowercase.
+fi
+
+echo $month $2 $3                                      # Prints the standardized date (month day year) separated by spaces.
+
+exit 0                                                 # Indicates successful execution. exits with a status of 0.
