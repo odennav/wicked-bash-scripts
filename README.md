@@ -1,4 +1,4 @@
-# Linux and Unix Bash Scripts
+# Wicked Bash Scripts
 
 Welcome to the "Linux-and-Unix-Bash-Scripts" repository!
 This collection of scripts is based on the book **"Wicked Cool Shell Scripts - 101 Scripts for Linux, OS X, and Unix Systems"**
@@ -30,13 +30,17 @@ To make your learning experience more practical, virtual machines (VMs) have bee
 
 2. **Clone the Repository:**
    Clone this repository to your local machine to get the scripts and the Vagrant file.
+   You might have to clone the repo again in Linux VM.
+   First install git in VM.
+
 
    ```bash
-   git clone https://github.com/odennav/Linux-Unix-Bash-Scripts.git
+   sudo apt-get install git
+   git clone https://github.com/odennav/wicked-bash-scripts.git
    cd Linux-Unix-Bash-Scripts
    ```
 
-3. **Spin Up the VMs:**
+3. **Spin Up Linux VMs:**
    ```bash
    vagrant up cool
    ```
