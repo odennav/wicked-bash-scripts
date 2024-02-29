@@ -43,7 +43,7 @@ checkForCmdInPath() {                             # Define `checkForCmdInPath` f
 
 
 if [ $# -ne 1 ]; then                             # Checks if number of command-line arguments is not equal to 1. 
-    echo "Usage: $0 <command>" >&2 ; exit 1       # Prints message to stderr stream and exuts with a status code of 1.
+    echo "Usage: $0 <argument>" >&2 ; exit 1       # Prints message to stderr stream and exuts with a status code of 1.
 fi
 
 checkForCmdInPath "$1"                            # Calls `checkForCmdInPath` with the provided command.
