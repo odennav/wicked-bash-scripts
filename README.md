@@ -39,7 +39,7 @@ To make your learning experience more practical, virtual machines (VMs) have bee
    ```bash
    sudo apt-get install git
    git clone https://github.com/odennav/wicked-bash-scripts.git
-   cd Linux-Unix-Bash-Scripts
+   cd wicked-bash-scripts/
    ```
 
 4. **Access the VM:**
