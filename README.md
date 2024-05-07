@@ -1,25 +1,6 @@
 # Wicked Bash Scripts
 
-Welcome to the "Linux-and-Unix-Bash-Scripts" repository!
-This collection of scripts is based on the book **"Wicked Cool Shell Scripts - 101 Scripts for Linux, OS X, and Unix Systems"**
-
-![Wicked Cool Shell Scripts](https://m.media-amazon.com/images/I/91yPEGKwJ1L._AC_UF350,350_QL50_.jpg)
-
-## Overview
-
-The scripts in this repository have been curated to provide beginners with a comprehensive learning experience in Bash scripting. Each script is accompanied by detailed comments, offering a line-by-line explanation to help newcomers grasp the concepts and techniques involved.
-
-## Book Credits
-
-Special thanks to the authors of the book:
-- Dave Taylor
-- Brandon Perry
-
-Their insightful work is the core for these scripts, and their expertise is acknowledged with gratitude.
-
-## Modifications
-
-Please note that some modifications have been made to the original scripts to enhance the learning experience. These adjustments aim to encourage a deeper understanding of Bash scripting and foster a hands-on approach to the material.
+Bash scripts modified and tested in virtual machine provisioned with Vagrant.
 
 ## Getting Started
 
@@ -67,7 +48,9 @@ To make your learning experience more practical, virtual machines (VMs) have bee
 
 ## Contribution Guidelines
 
-If you have your own wicked cool scripts or improvements to existing ones, suggestions are welcome! Please support authors by purchasing this book [here](https://www.amazon.com/Wicked-Cool-Shell-Scripts-2nd/dp/1593276028)
+If you have your own wicked cool scripts or improvements to existing ones, suggestions are welcome!
+
+Please support authors by purchasing this book [here](https://www.amazon.com/Wicked-Cool-Shell-Scripts-2nd/dp/1593276028)
 
 Happy Scripting!
 
